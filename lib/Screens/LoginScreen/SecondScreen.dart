@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:swishlist_ui/API/signup/signup_phone.dart';
 import 'package:swishlist_ui/Screens/LoginScreen/OtpScreen.dart';
 
 import '../../Constants/colors.dart';
@@ -88,10 +90,20 @@ class _SecondScreenState extends State<SecondScreen> {
           robo_500_14_7A:robo_500_14_29 , color:
           Phonec.text.isEmpty ?
               kFCF5B6 : kF7E641 , onTap:() {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => OtpScreen(email: '', password: '',)),
-            );
+            signupphone(number: Phonec.text).then((value) {
+              if(value['status']==true) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) =>
+                      OtpScreen(email: '', password: '',)),
+                );
+                Fluttertoast.showToast(
+                    msg: 'your opt is ${value['data']['otp']}');
+              } else{
+                return Fluttertoast.showToast(msg: value['message']);
+              }
+            });
+           
           } )
         ]),
       ),
