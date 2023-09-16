@@ -13,7 +13,9 @@ class _homeactivitesState extends State<homeactivites> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Activities',style: ubun_700_24_29)),
-      body: Column(children: [
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
 SizedBox(height: 96),
         Center(child: Image.asset('assets/images/bell.png')),
         SizedBox(height: 24),

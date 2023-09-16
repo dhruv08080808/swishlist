@@ -8,6 +8,31 @@ class Ialreadyhave extends StatefulWidget {
   State<Ialreadyhave> createState() => _IalreadyhaveState();
 }
 class _IalreadyhaveState extends State<Ialreadyhave> {
+  List title = [
+    'RESPAWN 110 Racing Style Gaming Chair, Reclining Ergonomic Chair with Footrest...',
+    'Samsung Galaxy Tab A8 Android Tablet, 10.5” LCD Scre...',
+    'RESPAWN 110 Racing Style Gaming Chair, Reclining Ergonomic Chair with Footrest...',
+    'Samsung Galaxy Tab A8 Android Tablet, 10.5” LCD Scre...',
+  ];
+  List priceee = [
+    '\$47.99',
+    '\$1247.99',
+    '\$47.99',
+    '\$1247.99',
+  ];
+  List productsimg=[
+    'assets/images/chair p.png',
+    'assets/images/tv.png',
+    'assets/images/chair p.png',
+    'assets/images/tv.png',
+
+  ];
+  List time=[
+    'Today',
+    'Yesterday',
+    'Today',
+    'Yesterday'
+  ];
   List imgg = [
     'Title',
     'Price',
@@ -38,6 +63,7 @@ class _IalreadyhaveState extends State<Ialreadyhave> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
         backgroundColor: kEEEEEE,
         appBar: AppBar(
           backgroundColor:kEEEEEE,
@@ -179,53 +205,63 @@ class _IalreadyhaveState extends State<Ialreadyhave> {
             Image.asset('assets/Icons/3 dot in a line.png')
           ],
         ),
-        body: SingleChildScrollView(
-          child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(16),
-                  child:       Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text('I have already',style:Ubun_700_24_29,),
-                      GestureDetector(
-                        onTap: (){
-                          showModalBottomSheet<void>(
-                            // context and builder are
-                            // required properties in this widget
-                            context: context,
-                            isScrollControlled: true,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.vertical(
-                                top: Radius.circular(0),
+        body: Column(
+            children: [
+              SizedBox(height: 32),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+
+                    Text('I have already',style:Ubun_700_24_29,),
+                    Container(
+                      height: 44,
+                      width: 86,
+                      decoration: BoxDecoration(
+                        color: kF7E641,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(12),
+                        child: GestureDetector(
+                          onTap: (){
+                            showModalBottomSheet<void>(
+                              // context and builder are
+                              // required properties in this widget
+                              context: context,
+                              isScrollControlled: true,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.vertical(
+                                  top: Radius.circular(0),
+                                ),
                               ),
-                            ),
-                            clipBehavior: Clip.antiAlias,
+                              clipBehavior: Clip.antiAlias,
 
-                            builder: (BuildContext context) {
-                              // we set up a container inside which
-                              // we create center column and display text
+                              builder: (BuildContext context) {
+                                // we set up a container inside which
+                                // we create center column and display text
 
-                              // Returning SizedBox instead of a Container
-                              return SingleChildScrollView(
-                                child: Column(
-                                  children: [
+                                // Returning SizedBox instead of a Container
+                                return SingleChildScrollView(
+                                  child: Column(
+                                    children: [
 
-                                    Container(
-                                      height: 272,
-                                      padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 32),
-                                      decoration: BoxDecoration(
+                                      Container(
+                                        height: 272,
+                                        padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 32),
+                                        decoration: BoxDecoration(
 
-                                        borderRadius: BorderRadius.circular(2),
-                                      ),
-                                      child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Text('Enter Link URL',style: ubun_700_24_29),
-                                          SizedBox(height: 8),
-                                          Text('Paste an amazon or etsy URL link to add a wanted product.',style: robo_400_12_70),
-                                          SizedBox(height: 28),
-                                          Container(
+                                          borderRadius: BorderRadius.circular(2),
+                                        ),
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Text('Enter Link URL',style: ubun_700_24_29),
+                                            SizedBox(height: 8),
+                                            Text('Paste an amazon or etsy URL link to add a wanted product.',style: robo_400_12_70),
+                                            SizedBox(height: 28),
+                                            Container(
                                               height: 52,
                                               decoration: BoxDecoration(
                                                   color: kEDEDF1,
@@ -241,65 +277,107 @@ class _IalreadyhaveState extends State<Ialreadyhave> {
 
                                                 ),
                                               ),
-                                          ),
-SizedBox(height: 16),
-                                          MainButton(height: 52, width: 96, title: 'Add', txtstyle: robo_500_14_B5, onTap: () {  }, color: kFCF5B6),
-                                        ],
+                                            ),
+                                            SizedBox(height: 16),
+                                            MainButton(height: 52, width: 96, title: 'Add', txtstyle: robo_500_14_B5, onTap: () {  }, color: kFCF5B6),
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                              );
-                            },
-                          );
-                        },
-                        child: Container(
-                          height: 44,
-                          width: 86,
-                          decoration: BoxDecoration(
-                            color: kF7E641,
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(12),
-                            child: Row(
-                              children: [
-                                Image.asset('assets/Icons/Plus.png',height: 20,width: 20,),
-                                Text('Add',style: robo_500_14_29)
-                              ],
-                            ),
+                                    ],
+                                  ),
+                                );
+                              },
+                            );
+                          },
+                          child: Row(
+                            children: [
+                              Image.asset('assets/Icons/Plus.png',height: 20,width: 20,),
+                              Text('Add',style: robo_500_14_29)
+                            ],
                           ),
                         ),
-                      )
-                    ],
-                  ),
+                      ),
+                    )
+                  ],
                 ),
-                SizedBox(height: 20),
-                Container(
-                    height: 1000,
+              ),
+              SizedBox(height: 20),
+
+
+
+              Expanded(
+                child: Container(
                     decoration: BoxDecoration(
-                      color: kFFFFFF,
-                      borderRadius: BorderRadius.circular(24),
+                        color: kFFFFFF,
+                        borderRadius: BorderRadius.only(     topLeft: Radius.circular(24),
+                          topRight: Radius.circular(24),)
 
                     ),
-                    child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 36),
-                        child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text('9 products',style: robo_500_12_70),
-                              SizedBox(height: 12),
-                              Product(immmg: 'assets/images/chair p.png', Tittle:'RESPAWN 110 Racing Style Gaming Chair,\nReclining Ergonomic Chair with Footrest...', pp: '\$47.99', timeee: 'Today', icconn: 'assets/Icons/world icon.png',),
-                              SizedBox(height: 16),
-                              Product(immmg: 'assets/images/tv.png', Tittle:'Samsung Galaxy Tab A8 Android Tablet,\n10.5” LCD Scre...', pp: '\$1247.99', timeee: 'Yesterday', icconn: 'assets/Icons/profile icon.png',),
-                              SizedBox(height: 16),
-                              Product(immmg: 'assets/images/chair p.png', Tittle:'RESPAWN 110 Racing Style Gaming Chair,\nReclining Ergonomic Chair with Footrest...', pp: '\$47.99', timeee: 'Today', icconn: 'assets/Icons/world icon.png',),
-                              SizedBox(height: 16),
-                              Product(immmg: 'assets/images/tv.png', Tittle:'Samsung Galaxy Tab A8 Android Tablet,\n10.5” LCD Scre...', pp: '\$1247.99', timeee: 'Yesterday', icconn: 'assets/Icons/profile icon.png',),
-                              SizedBox(height: 16),
-                              Product(immmg: 'assets/images/chair p.png', Tittle:'RESPAWN 110 Racing Style Gaming Chair,\nReclining Ergonomic Chair with Footrest...', pp: '\$47.99', timeee: 'Today', icconn: 'assets/Icons/world icon.png',),
-                            ])))]),
-        )
+                    child:
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+
+                          SizedBox(height: 16),
+                          Text('9 products',style: robo_500_12_70),
+                          SizedBox(height: 12),
+                          ListView.separated(
+                              padding: EdgeInsets.zero,
+                              scrollDirection: Axis.vertical,
+                              shrinkWrap: true,
+                              itemBuilder: (context,i){
+                                return Container(
+                                    child: Row(children: [
+                                      SizedBox(width: 8),
+                                      Container(
+                                          height: 86,
+                                          width: 86,
+                                          decoration: BoxDecoration(
+                                            border: Border.all(color: kE0E0E0),borderRadius: BorderRadius.circular(8),
+                                          ),
+                                          child: Image.asset(productsimg[i])),
+                                      SizedBox(width: 12),
+                                      Expanded(
+                                        child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            mainAxisAlignment: MainAxisAlignment.start,
+                                            children: [
+                                              Text(title[i],style: robo_400_12_29,maxLines: 2,overflow: TextOverflow.ellipsis),
+                                              SizedBox(height: 8),
+                                              Text(priceee[i],style: robo_500_14_29,maxLines: 2,overflow: TextOverflow.ellipsis),
+                                              SizedBox(height: 4),
+                                              Row(
+                                                children: [
+                                                  Image.asset('assets/Icons/world icon.png'),
+                                                  SizedBox(width: 6),
+                                                  Image.asset('assets/Icons/dot.png'),
+                                                  SizedBox(width: 6),
+                                                  Text(time[i],style: robo_400_12_70),
+                                                ],
+                                              ),
+                                            ]),
+                                      ),
+
+
+                                    ],)
+
+
+
+                                );
+                              }, separatorBuilder: (context,i){
+                            return SizedBox(height: 16);
+
+                          }, itemCount:title.length ),
+                        ],),
+                    )
+
+                ),
+              )
+
+
+            ])
     );
   }
 }
@@ -327,7 +405,7 @@ class Product extends StatelessWidget {
           Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Expanded(child: Text(Tittle,style: robo_400_12_29)),
+                Expanded(child: Text(Tittle,style: robo_400_12_29,maxLines: 2,overflow: TextOverflow.ellipsis)),
                 Text(pp,style: robo_500_14_29),
                 Row(
                   children: [

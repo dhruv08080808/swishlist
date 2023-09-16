@@ -37,7 +37,7 @@ bottomNavigationBar: SingleChildScrollView(
     child: Column(children: [
       Stack(children: [
         CircularPercentIndicator(
-          radius:100,
+          radius:50,
           lineWidth: 10,
           animation: true,
           startAngle: 60,
@@ -49,7 +49,7 @@ bottomNavigationBar: SingleChildScrollView(
 
         ),
         CircularPercentIndicator(
-          radius:100,
+          radius:50,
           lineWidth: 10,
           animation: true,
           startAngle: 120,
@@ -61,7 +61,7 @@ bottomNavigationBar: SingleChildScrollView(
 
         ),
         CircularPercentIndicator(
-          radius:100,
+          radius:50,
           lineWidth: 10,
           animation: true,
           startAngle: 180,
@@ -73,7 +73,7 @@ bottomNavigationBar: SingleChildScrollView(
 
         ),
         CircularPercentIndicator(
-          radius:100,
+          radius:50,
           lineWidth: 10,
           animation: true,
           startAngle: 240,
@@ -85,7 +85,7 @@ bottomNavigationBar: SingleChildScrollView(
 
         ),
         CircularPercentIndicator(
-          radius:100,
+          radius:50,
           lineWidth: 10,
           animation: true,
           startAngle: 300,
@@ -96,7 +96,7 @@ bottomNavigationBar: SingleChildScrollView(
           backgroundColor: Colors.transparent,
         ),
         CircularPercentIndicator(
-          radius: 100,
+          radius: 50,
           lineWidth: 10,
           animation: true,
           percent: percent,
@@ -243,7 +243,7 @@ bottomNavigationBar: SingleChildScrollView(
         percent = 0.10001;
         percent2 = 0.0;
       });
-      // njunjnjnjnjk,ooooooooooooooooooooooooooooooooooooooooooooooolkol,
+
     }
     ),
     OnBoadingScreen4(

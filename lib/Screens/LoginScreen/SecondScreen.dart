@@ -90,7 +90,7 @@ class _SecondScreenState extends State<SecondScreen> {
               kFCF5B6 : kF7E641 , onTap:() {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => OtpScreen()),
+              MaterialPageRoute(builder: (context) => OtpScreen(email: '', password: '',)),
             );
           } )
         ]),

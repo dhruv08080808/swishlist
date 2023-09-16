@@ -14,7 +14,7 @@ class _SearchProductState extends State<SearchProduct> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: Image.asset('assets/Icons/arrowforappbar.png'),
+
           backgroundColor: kFDFAE3,
           title: Text('Search product, username & more',style: robo_400_14_7E
       ),

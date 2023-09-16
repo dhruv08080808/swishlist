@@ -32,10 +32,8 @@ class _OnBoadingScreen1State extends State<OnBoadingScreen1> {
           child: SingleChildScrollView(
             child:
             Column(
-
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-
                 SizedBox(height: 98),
                 Text('All your wishlists at one place, even better.',style: ubun_700_26_29,textAlign: TextAlign.center),
                 SizedBox(height: 16),
@@ -57,123 +55,15 @@ class _OnBoadingScreen1State extends State<OnBoadingScreen1> {
                     //   circularStrokeCap: CircularStrokeCap.round,
                     //   arcType: ArcType.FULL_REVERSED,
                     // ),
-                    Stack(
-                      children: [
-                        CircularPercentIndicator(
-                          radius: 40.0,
-                          percent: 0.20,
-                          lineWidth: 10,
-                          progressColor: Colors.grey,
-                          fillColor: Colors.transparent,
-                          circularStrokeCap: CircularStrokeCap.round,
-                          arcType: ArcType.FULL_REVERSED,
-                          startAngle: 0.10,
-                        ),
-                        CircularPercentIndicator(
-                          radius: 40.0,
-                          percent: 0.40,
-                          lineWidth: 10,
-                          progressColor: Colors.grey,
-                          fillColor: Colors.transparent,
-                          circularStrokeCap: CircularStrokeCap.round,
-                          arcType: ArcType.FULL_REVERSED,
-                          startAngle: 0.10,
-                        ),
-                        CircularPercentIndicator(
-                          radius: 40.0,
-                          percent: 0.60,
-                          lineWidth: 10,
-                          progressColor: Colors.grey,
-                          fillColor: Colors.transparent,
-                          circularStrokeCap: CircularStrokeCap.round,
-                          arcType: ArcType.FULL_REVERSED,
-                          startAngle: 0.10,
-                        ),
-                        CircularPercentIndicator(
-                          radius: 40.0,
-                          percent: 0.80,
-                          lineWidth: 10,
-                          progressColor: Colors.grey,
-                          fillColor: Colors.transparent,
-                          circularStrokeCap: CircularStrokeCap.round,
-                          arcType: ArcType.FULL_REVERSED,
-                          startAngle: 0.10,
-                        ),
-                        CircularPercentIndicator(
-                          radius: 40.0,
-                          percent: 0.20,
-                          lineWidth: 10,
-                          progressColor: Colors.yellow,
-                          fillColor: Colors.transparent,
-                          circularStrokeCap: CircularStrokeCap.round,
-                          arcType: ArcType.FULL_REVERSED,
-                          startAngle: 0.40,
-                        ),
-                        /*     CircularPercentIndicator(
-                            radius: 40.0,
-                            percent: 0.50,
-                            lineWidth: 10,
-                            progressColor: Colors.cyan,
-                            fillColor: Colors.transparent,
-                            circularStrokeCap: CircularStrokeCap.round,
-                            arcType: ArcType.FULL_REVERSED,
-                            //startAngle: 20
-                        ),
-                        CircularPercentIndicator(
-                            radius: 40.0,
-                            percent: 0.50,
-                            lineWidth: 10,
-                            progressColor: Colors.black,
-                            fillColor: Colors.transparent,
-                            circularStrokeCap: CircularStrokeCap.round,
-                            arcType: ArcType.FULL_REVERSED,
-                            //startAngle: 20
-                        ),
-                        CircularPercentIndicator(
-                            radius: 40.0,
-                            percent: 0.50,
-                            lineWidth: 10,
-                            progressColor: Colors.red,
-                            fillColor: Colors.transparent,
-                            circularStrokeCap: CircularStrokeCap.round,
-                            arcType: ArcType.FULL_REVERSED,
-                            //startAngle: 20
-                        ),*/
-                      ],
-                    ),
-                  ],
-                ),
+                ]
+    )
+]
+    ),
+          )
+        )
+    ],
 
-                // CircularPercentIndicator(
-                //   radius: 40.0,
-                //   lineWidth: 10,
-                //   percent: 0.20,
-                //    startAngle: 60,
-                //   center: new Text("90%"),
-                //   progressColor: Colors.green,
-                //   fillColor: Colors.transparent,
-                // ),
-
-
-                // Container(
-                //   padding: const EdgeInsets.all(20.0),
-                //   decoration: const BoxDecoration(
-                //
-                //     color:Colors.yellow,
-                //
-                //       shape: BoxShape.circle),
-                //   child: const Icon(Icons.arrow_forward_ios),
-                //
-                // ),
-
-              ],),
-
-          ),
-        ),
-      ],)
-
-
-
+          )
     );
   }
 }

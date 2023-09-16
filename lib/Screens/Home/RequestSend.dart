@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:swishlist_ui/Constants/colors.dart';
 import 'package:swishlist_ui/Constants/textstyle.dart';
+import 'package:swishlist_ui/Screens/ButtomNavScreen/ButtomNavScreen.dart';
 import 'package:swishlist_ui/Screens/Product/StatusOfProduct.dart';
 import '../../widgets/buttons.dart';
 class RequestSend extends StatefulWidget {
@@ -70,7 +71,7 @@ class _RequestSendState extends State<RequestSend> {
             child: MainButton(height: 52,width: double.infinity,title: 'Done',txtstyle: robo_500_14_29,color: kF7E641 , onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => StatusOfProduct()),
+                MaterialPageRoute(builder: (context) => ButtomNavScreen()),
               );
             }),
           ),

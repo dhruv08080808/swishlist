@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:swishlist_ui/Screens/Friend/Fav.dart';
@@ -31,12 +33,14 @@ import 'Screens/Home/ProfilePrivacy.dart';
 import 'Screens/Home/RequestSend.dart';
 import 'Screens/Home/SearchProduct.dart';
 import 'Screens/Home/Setting.dart';
+import 'Screens/LoginScreen/ResetPass.dart';
 import 'Screens/LoginScreen/createnewaccount.dart';
 import 'Screens/OnBoadingScreen/IntroScreen.dart';
 import 'Screens/OnBoadingScreen/OnBoadingScreen1.dart';
 import 'Screens/OnBoadingScreen/OnBoadingScreen2.dart';
 import 'Screens/OnBoadingScreen/OnBoadingScreen3.dart';
 import 'Screens/OnBoadingScreen/Sample.dart';
+import 'Screens/OnBoadingScreen/introoscreen.dart';
 import 'Screens/Product/EnterProductDetails.dart';
 import 'Screens/Product/HomeOfProduct.dart';
 import 'Screens/Product/Ialreadyhave.dart';
@@ -55,12 +59,25 @@ import 'Screens/Profile/Pets.dart';
 import 'Screens/Profile/Sized And Weights.dart';
 import 'Screens/Profile/UserProfile.dart';
 import 'Screens/SplashScreen/SplashScreen.dart';
+import 'Screens/api/getapi.dart';
+import 'constant/sharedprefrences/sharedprefrences.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  HttpOverrides.global = MyHttpOverrides();
+  await SharedPrefs().init();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
   runApp(const MyApp());
+}
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+  }
 }
 
 class MyApp extends StatelessWidget {
@@ -91,7 +108,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: IntroScreen(),
+      home: SplashScreen(),
     );
   }
 }

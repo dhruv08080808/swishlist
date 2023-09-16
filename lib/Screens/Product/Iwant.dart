@@ -1,5 +1,9 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:swishlist_ui/Constants/textstyle.dart';
+import '../../API/Product/get_product_api.dart';
+import '../../API/Product/getallproduct.dart';
+import '../../API/sizesandweights/update_sizeandw_api.dart';
 import '../../Constants/colors.dart';
 import '../../widgets/buttons.dart';
 import '../ProductDetails/ProductDetails.dart';
@@ -10,6 +14,10 @@ class Iwant extends StatefulWidget {
   State<Iwant> createState() => _IwantState();
 }
 class _IwantState extends State<Iwant> {
+
+
+  var dio =Dio();
+  int index=0;
   TextEditingController amazonlink=TextEditingController();
   List imgg = [
   'Title',
@@ -37,10 +45,45 @@ class _IwantState extends State<Iwant> {
     'This month',
     'Previous Year',
   ];
+ List title = [
+   'RESPAWN 110 Racing Style Gaming Chair, Reclining Ergonomic Chair with Footrest...',
+   'Samsung Galaxy Tab A8 Android Tablet, 10.5” LCD Scre...',
+   'RESPAWN 110 Racing Style Gaming Chair, Reclining Ergonomic Chair with Footrest...',
+   'Samsung Galaxy Tab A8 Android Tablet, 10.5” LCD Scre...',
+ ];
+ List priceee = [
+   '\$47.99',
+   '\$1247.99',
+   '\$47.99',
+   '\$1247.99',
+ ];
+ List productsimg=[
+   'assets/images/chair p.png',
+   'assets/images/tv.png',
+   'assets/images/chair p.png',
+   'assets/images/tv.png',
 
+ ];
+ List time=[
+   'Today',
+   'Yesterday',
+   'Today',
+   'Yesterday'
+ ];
+getproductdetails(){
+ var resp= getProductsApi();
+ resp.then((value) {
+   if(value['status']==true){
+     setState(() {
+
+     });
+   }
+ });
+}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
         backgroundColor: kE5F3E2,
         appBar: AppBar(
           backgroundColor:kE5F3E2,
@@ -84,7 +127,9 @@ class _IwantState extends State<Iwant> {
                                       child: Padding(
                                         padding: const EdgeInsets.symmetric(horizontal: 12,vertical: 8
                                         ),
-                                        child: Text(imgg[i],style: robo_400_14_38),
+                                        child: GestureDetector(
+
+                                            child: Text(imgg[i],style: robo_400_14_38)),
                                       ),
                                     );
 
@@ -182,13 +227,15 @@ class _IwantState extends State<Iwant> {
             Image.asset('assets/Icons/3 dot in a line.png')
           ],
         ),
-        body: ListView(
+        body: Column(
             children: [
+              SizedBox(height: 32),
               Padding(
-                padding: const EdgeInsets.all(16),
-                child:       Row(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
+
                     Text('I want',style:Ubun_700_24_29,),
                     Container(
                       height: 44,
@@ -277,37 +324,82 @@ class _IwantState extends State<Iwant> {
                 ),
               ),
               SizedBox(height: 20),
-              Container(
-                  height: 1000,
-                  decoration: BoxDecoration(
-                    color: kFFFFFF,
-                    borderRadius: BorderRadius.circular(24),
 
-                  ),
-                  child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 36),
+
+
+              Expanded(
+                child: Container(
+                    decoration: BoxDecoration(
+                        color: kFFFFFF,
+                        borderRadius: BorderRadius.only(     topLeft: Radius.circular(24),
+                          topRight: Radius.circular(24),)
+
+                    ),
+                    child:
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text('9 products',style: robo_500_12_70),
-                            SizedBox(height: 12),
-                            GestureDetector(
-onTap: (){
-  Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) => productt ()),
-  );
-},
-                                child: Product(immmg: 'assets/images/chair p.png', Tittle:'RESPAWN 110 Racing Style Gaming Chair,\nReclining Ergonomic Chair with Footrest...', pp: '\$47.99', timeee: 'Today')),
-                            SizedBox(height: 16),
-                            Product(immmg: 'assets/images/tv.png', Tittle:'Samsung Galaxy Tab A8 Android Tablet,\n10.5” LCD Scre...', pp: '\$1247.99', timeee: 'Yesterday'),
-                            SizedBox(height: 16),
-                            Product(immmg: 'assets/images/chair p.png', Tittle:'RESPAWN 110 Racing Style Gaming Chair,\nReclining Ergonomic Chair with Footrest...', pp: '\$47.99', timeee: 'Today'),
-                            SizedBox(height: 16),
-                            Product(immmg: 'assets/images/tv.png', Tittle:'Samsung Galaxy Tab A8 Android Tablet,\n10.5” LCD Scre...', pp: '\$1247.99', timeee: 'Yesterday'),
-                            SizedBox(height: 16),
-                            Product(immmg: 'assets/images/chair p.png', Tittle:'RESPAWN 110 Racing Style Gaming Chair,\nReclining Ergonomic Chair with Footrest...', pp: '\$47.99', timeee: 'Today'),
-                          ])))])
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+
+                          SizedBox(height: 16),
+                          Text('9 products',style: robo_500_12_70),
+                          SizedBox(height: 12),
+                          ListView.separated(
+                              padding: EdgeInsets.zero,
+                              scrollDirection: Axis.vertical,
+                              shrinkWrap: true,
+                              itemBuilder: (context,i){
+                                return Container(
+                                    child: Row(children: [
+                                      SizedBox(width: 8),
+                                      Container(
+                                          height: 86,
+                                          width: 86,
+                                          decoration: BoxDecoration(
+                                            border: Border.all(color: kE0E0E0),borderRadius: BorderRadius.circular(8),
+                                          ),
+                                          child: Image.asset(productsimg[i])),
+                                      SizedBox(width: 12),
+                                      Expanded(
+                                        child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            mainAxisAlignment: MainAxisAlignment.start,
+                                            children: [
+                                              Text(title[i],style: robo_400_12_29,maxLines: 2,overflow: TextOverflow.ellipsis),
+                                              SizedBox(height: 8),
+                                              Text(priceee[i],style: robo_500_14_29,maxLines: 2,overflow: TextOverflow.ellipsis),
+                                              SizedBox(height: 4),
+                                              Row(
+                                                children: [
+                                                  Image.asset('assets/Icons/world icon.png'),
+                                                  SizedBox(width: 6),
+                                                  Image.asset('assets/Icons/dot.png'),
+                                                  SizedBox(width: 6),
+                                                  Text(time[i],style: robo_400_12_70),
+                                                ],
+                                              ),
+                                            ]),
+                                      ),
+
+
+                                    ],)
+
+
+
+                                );
+                              }, separatorBuilder: (context,i){
+                            return SizedBox(height: 16);
+
+                          }, itemCount:title.length ),
+                        ],),
+                    )
+
+                ),
+              )
+
+
+            ])
     );
   }
 }
@@ -334,7 +426,7 @@ class Product extends StatelessWidget {
           Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Expanded(child: Text(Tittle,style: robo_400_12_29)),
+                Expanded(child: Text(Tittle,style: robo_400_12_29,maxLines: 2,overflow: TextOverflow.ellipsis)),
                 Text(pp,style: robo_500_14_29),
                 Text(timeee,style: robo_400_12_70),
               ])])

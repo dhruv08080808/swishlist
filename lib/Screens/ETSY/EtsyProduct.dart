@@ -55,8 +55,9 @@ class _EtsyProductState extends State<EtsyProduct> {
                     padding: const EdgeInsets.all(10),
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment:  MainAxisAlignment.center,
                         children: [
-                      Image.asset('assets/images/jhumka.jpg',height: 150,),
+                      Center(child: Image.asset('assets/images/jhumka.jpg',height: 150,)),
                       SizedBox(height: 8),
                       GestureDetector(
                           onTap: (){

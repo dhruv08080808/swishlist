@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:swishlist_ui/Constants/textstyle.dart';
+import 'package:swishlist_ui/Screens/Friend/Friend.dart';
+import 'package:swishlist_ui/Screens/Friend/mess.dart';
 
 import '../../Constants/colors.dart';
 import '../../widgets/buttons.dart';
+import 'AddListOfFriends.dart';
 
 class AddFriend extends StatefulWidget {
   const AddFriend({super.key});
@@ -18,10 +21,26 @@ class _AddFriendState extends State<AddFriend> {
       appBar: AppBar(title: Text('Friends',style: ubun_700_24_29),
       actions: [
         Image.asset('assets/Icons/friend Search.png'),
-        Image.asset('assets/Icons/friend add.png'),
-        Image.asset('assets/Icons/freind message.png'),
+        GestureDetector(
+            onTap: (){
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => AddListOfFriends()),
+              );
+            },
+            child: Image.asset('assets/Icons/friend add.png')),
+        GestureDetector(
+            onTap: (){
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => mess()),
+              );
+            },
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(0, 0, 16, 0),
+              child: Image.asset('assets/Icons/freind message.png'),
+            )),
         ],
-
       ),
       body: Column(
 crossAxisAlignment: CrossAxisAlignment.center,
@@ -42,7 +61,14 @@ crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Image.asset('assets/Icons/friend add icon.png'),
                   SizedBox(width: 4),
-                  Text('Add Friend',style: robo_400_14_b_29)
+                  GestureDetector(
+                      onTap: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Friend()),
+                        );
+                      },
+                      child: Text('Add Friend',style: robo_400_14_b_29))
                 ],
               ),
             ),

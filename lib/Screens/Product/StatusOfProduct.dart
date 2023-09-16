@@ -1,9 +1,13 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:swishlist_ui/Screens/Product/Ialreadyhave.dart';
 import 'package:swishlist_ui/Screens/Product/Idontwant.dart';
 
 import '../../Constants/colors.dart';
 import '../../Constants/textstyle.dart';
+import '../../Constants/url.dart';
+import '../../Models/login_model.dart';
+import '../../constant/sharedprefrences/sharedprefrences.dart';
 import '../Home/AddFamilyMember.dart';
 import '../Home/Setting.dart';
 import 'Iwant.dart';
@@ -18,6 +22,9 @@ class StatusOfProduct extends StatefulWidget {
 
 class _StatusOfProductState extends State<StatusOfProduct> {
   bool selected = false;
+  bool showcard=false;
+
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -32,14 +39,38 @@ class _StatusOfProductState extends State<StatusOfProduct> {
                   child: Column(
                     children: [
                       Row(children: [
-                        Image.asset('assets/images/uncle 25 percent.png'),
+                        GestureDetector(
+                  onTap:(){
+          setState(() {
+            showcard=!showcard;
+          });
+          },
+                            child: Container(
+                              height: 44,
+                              width: 44,
+                              clipBehavior: Clip.hardEdge,
+                              decoration: BoxDecoration(shape: BoxShape.circle,),
+                                child:
+                                CachedNetworkImage(
+                                  imageUrl: '$baseurl${SharedPrefs().getphoto()}',
+                                    placeholder: (context, url) => CircularProgressIndicator(),
+                                  errorWidget: (context, url, error) => Icon(Icons.error),
+                                ),
+
+                                // Image.asset('${SharedPrefs().getphoto()}'
+                                //
+                                // )
+
+                            )
+
+                        ),
                         SizedBox(width: 12),
                         Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                           Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                Text('Michael Scott', style: robo_500_16_29),
+                                Text('${SharedPrefs().getNameToken()}', style: robo_500_16_29),
                                 InkWell(
                                   onTap: (){
                                     setState(() {
@@ -50,7 +81,7 @@ class _StatusOfProductState extends State<StatusOfProduct> {
 
                                         child: Image.asset('assets/images/direction-down 01.png'))),
                               ]),
-                          Text('Micheal139', style: robo_400_14_70),
+                          Text('${SharedPrefs().getusertoken()}', style: robo_400_14_70),
                         ]),
                         Spacer(),
                         Image.asset('assets/Icons/share icon.png')
@@ -64,7 +95,9 @@ duration: Duration(seconds: 5),
 
 child: Padding(
   padding: const EdgeInsets.all(16),
-  child:   Column(children: [
+  child:   Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
     family(img: 'assets/Icons/aunty.png', nameee: 'Jan Levinson', status: 'Wife', surname: 'JanLovey22'),
     SizedBox(height: 12),
     family(img: 'assets/Icons/uncle.png', nameee: 'Dwight Schrute', status: 'Brother', surname: 'Dwight372882'),
@@ -115,11 +148,34 @@ child: Padding(
 ))
               :
                 SizedBox(),
+          showcard?
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Image.asset('assets/images/gfx.png', width: 328),
-                ),
+                  child: Stack(
+                    children: [
+                      selected==true?SizedBox():
+                      Image.asset('assets/images/gfx.png',fit: BoxFit.fitWidth),
 
+                      Positioned(
+                        right: 20,
+                        top: 25,
+                        child: GestureDetector(
+                          onTap: (){
+                            setState(() {
+                              showcard=!showcard;
+                            });
+                          },
+                          child: Container(
+                            height: 32,
+                           width: 32,
+                            color: Colors.transparent,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ):
+SizedBox(),
                 Container(
                     decoration: BoxDecoration(
                       image: DecorationImage(
@@ -179,6 +235,7 @@ child: Padding(
                                 child: Padding(
                                   padding: const EdgeInsets.symmetric(horizontal: 110,vertical: 16),
                                   child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Image.asset('assets/Icons/Plus.png',height: 20),
                                       Text(' Add Product',style: robo_500_14_32,),
@@ -249,6 +306,7 @@ child: Padding(
                                 child: Padding(
                                   padding: const EdgeInsets.symmetric(horizontal: 110,vertical: 16),
                                   child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Image.asset('assets/Icons/Plus.png',height: 20),
                                       Text(' Add Product',style: robo_500_14_32,),
@@ -319,6 +377,7 @@ child: Padding(
                                 child: Padding(
                                   padding: const EdgeInsets.symmetric(horizontal: 110,vertical: 16),
                                   child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Image.asset('assets/Icons/Plus.png',height: 20),
                                       Text(' Add Product',style: robo_500_14_32,),
@@ -351,9 +410,9 @@ class family extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height:44,
-      width: 328,
+
       child: Row(
-        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
         children: [
           Image.asset(img),
           SizedBox(width: 8),
@@ -361,6 +420,8 @@ class family extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(nameee,style: robo_400_14_1F),
                     SizedBox(width: 8),
@@ -377,8 +438,8 @@ class family extends StatelessWidget {
                 ),
                 Text(surname,style: robo_400_14_1F),
               ]),
-          Spacer(),
-          Image.asset('assets/Icons/opitionicon.png',)
+Spacer(),
+          Image.asset('assets/Icons/opitionicon.png',alignment: Alignment.topRight)
         ],
       ),
     );

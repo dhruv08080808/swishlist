@@ -20,52 +20,53 @@ class _SettingState extends State<Setting> {
      AppBar(
        backgroundColor: kF7E641,
      ),
-      body: Column(children: [
-        Stack(
-          children: [
-            Column(children: [
-              SizedBox(height: 20),
-              Text('Settings',style: ubun_700_28_29),
-              SizedBox(height: 48),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 16),
-                height: 146,
-                width: 328,
-               decoration: BoxDecoration(
-                 color: kFFFFFF,
-                 borderRadius: BorderRadius.circular(12),
-               ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                  SizedBox(height: 20),
-                  Text('User',style:robo_400_12_A3,),
-                    SizedBox(height: 8),
-                    GestureDetector(
-                        onTap: (){
-
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) =>  UserProfile()),
-                          );
-
-                        },
-                        child: opition(txt: 'Account')),
-                    SizedBox(height: 4),
-                    opition(txt: 'Privacy'),
-                ],),
-              ),
-              SizedBox(height: 12),
-            Stack(
-
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Column(children: [
+          Stack(
+            children: [
+              Column(children: [
+                SizedBox(height: 20),
+                Text('Settings',style: ubun_700_28_29),
+                SizedBox(height: 48),
+                Center(
                   child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 16),
+                    height: 146,
+                   decoration: BoxDecoration(
+                     color: kFFFFFF,
+                     borderRadius: BorderRadius.circular(12),
+                   ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                      SizedBox(height: 20),
+                      Text('User',style:robo_400_12_A3,),
+                        SizedBox(height: 8),
+                        GestureDetector(
+                            onTap: (){
+
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) =>  UserProfile()),
+                              );
+
+                            },
+                            child: opition(txt: 'Account')),
+                        SizedBox(height: 4),
+                        opition(txt: 'Privacy'),
+                    ],),
+                  ),
+                ),
+                SizedBox(height: 12),
+              Stack(
+
+                children: [
+                  Container(
                       padding: EdgeInsets.symmetric(horizontal: 16),
                       height: 146,
-                      width: 328,
+
                       decoration: BoxDecoration(
                         color: kFFFFFF,
                         borderRadius: BorderRadius.circular(12),
@@ -95,32 +96,33 @@ class _SettingState extends State<Setting> {
                         Container(
                        width: 296,
                          height: 40,
-                        child: Text('Share with your friends',style: robo_500_14_39,))]))),]),
-            SizedBox(height: 12),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 16),
-                height: 146,
-                width: 328,
-                decoration: BoxDecoration(
-                  color: kFFFFFF,
-                  borderRadius: BorderRadius.circular(12),
+                        child: Text('Share with your friends',style: robo_500_14_39,))])),]),
+              SizedBox(height: 12),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  height: 146,
+
+                  decoration: BoxDecoration(
+                    color: kFFFFFF,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(height: 20),
+                      Text('Support',style:robo_400_12_A3,),
+                      SizedBox(height: 8),
+                      opition(txt: 'Help & Support'),
+                      SizedBox(height: 4),
+                      opition(txt: 'Agreements'),
+                    ],),
                 ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(height: 20),
-                    Text('Support',style:robo_400_12_A3,),
-                    SizedBox(height: 8),
-                    opition(txt: 'Help & Support'),
-                    SizedBox(height: 4),
-                    opition(txt: 'Agreements'),
-                  ],),
-              ),
-            ]),
-          ],
-        ),
-      ],),
+              ]),
+            ],
+          ),
+        ],),
+      ),
     );
   }
 }
@@ -132,7 +134,7 @@ class opition extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 296,
+
       height: 40,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

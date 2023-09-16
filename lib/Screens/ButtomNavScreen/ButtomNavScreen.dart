@@ -50,7 +50,8 @@ class _ButtomNavScreenState extends State<ButtomNavScreen> {
                       });
                     },
                     child: Column(children: [
-                      Image.asset('assets/Icons/home icon.png',height: 28,width: 28),
+                      Image.asset('assets/Icons/home icon.png',color: myindex==0?
+                      Colors.black:null,height: 28,width: 28),
                       SizedBox(height: 8),
                       Text('Home',style:  myindex==0?
                       robo_500_12_29:robo_400_12_70 ),
@@ -67,7 +68,8 @@ class _ButtomNavScreenState extends State<ButtomNavScreen> {
                       });
                     },
                     child: Column(children: [
-                      Image.asset('assets/Icons/store icon.png',height: 24,width: 24),
+                      Image.asset('assets/Icons/store icon.png',color: myindex==1?
+                      Colors.black:null,height: 24,width: 24),
                       SizedBox(height: 8),
                       Text('Stores',style:   myindex==1?
                           robo_500_12_29:robo_400_12_70),
@@ -83,7 +85,8 @@ class _ButtomNavScreenState extends State<ButtomNavScreen> {
                       });
                     },
                     child: Column(children: [
-                      Image.asset('assets/Icons/favv icon.png',height: 24,width: 24),
+                      Image.asset('assets/Icons/favv icon.png',color: myindex==2?
+                      Colors.black:null,height: 24,width: 24),
                       SizedBox(height: 8),
                       Text('Activities',style:  myindex==2?
                       robo_500_12_29:robo_400_12_70),
@@ -99,7 +102,8 @@ class _ButtomNavScreenState extends State<ButtomNavScreen> {
                       });
                     },
                     child: Column(children: [
-                      Image.asset('assets/Icons/friends icon.png',height: 24,width: 24),
+                      Image.asset('assets/Icons/friends icon.png', color:  myindex==3?
+                      Colors.black:null,height: 24,width: 24),
                       SizedBox(height: 8),
                       Text('Friends',style:   myindex==3?
                           robo_500_12_29:robo_400_12_70),

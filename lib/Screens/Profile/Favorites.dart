@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:swishlist_ui/Constants/textstyle.dart';
+import 'package:swishlist_ui/Models/login_model.dart';
 
+import '../../API/Favorites/get_Favorities_api.dart';
+import '../../API/Favorites/update_fav_api.dart';
 import '../../Constants/colors.dart';
+import '../../Models/Favorites_model.dart';
+import '../../widgets/buttons.dart';
 import '../../widgets/dialogs/name_dialog.dart';
 class Favorites extends StatefulWidget {
   const Favorites({super.key});
@@ -9,7 +15,13 @@ class Favorites extends StatefulWidget {
   State<Favorites> createState() => _FavoritesState();
 }
 class _FavoritesState extends State<Favorites> {
-  TextEditingController carscontroller=TextEditingController();
+
+  @override
+  void initState() {
+    getFavourites();
+    super.initState();
+  }
+TextEditingController carscontroller=TextEditingController();
   TextEditingController bikescontroller=TextEditingController();
   TextEditingController moviescontroller=TextEditingController();
   TextEditingController showscontroller=TextEditingController();
@@ -24,6 +36,59 @@ class _FavoritesState extends State<Favorites> {
   TextEditingController countriesescontroller=TextEditingController();
   TextEditingController resturantscontroller=TextEditingController();
   TextEditingController hostelscontroller=TextEditingController();
+
+FavoritiesModel favmodel = FavoritiesModel(
+  data: Data(
+    cars: '',
+    bikes: '',
+    movies: '',
+    shows: '',
+    foods: '',
+    gadgets: '',
+    superheroes: '',
+    actors: '',
+    actresses: '',
+    singers: '',
+    players: '',
+    cities: '',
+    countries: '',
+    restaurants: '',
+    hotels: '',
+    privacyStatus: '',
+    createdAt: '',
+  )
+);
+
+bool isLoading = false;
+
+  getFavourites() {
+
+    getfavapi().then((value) {
+      if(value['status']==true){
+      setState(() {
+       favmodel= FavoritiesModel.fromJson(value);
+
+//       for(var v in value ){
+//      favmodel.add(FavoritiesModel.fromJson(v));
+//   }
+//
+//   isLoading = false;
+
+      });
+      }
+      else{
+        setState(() {
+          //isLoading = false;
+        });
+      }
+
+    });
+  }
+
+  LoginResponse? responsep;
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +100,7 @@ class _FavoritesState extends State<Favorites> {
       ),
 
       ),
-      body: SingleChildScrollView(
+      body: isLoading ? CircularProgressIndicator() : SingleChildScrollView(
         child: Column(
           children: [
             LinearProgressIndicator(
@@ -50,9 +115,9 @@ class _FavoritesState extends State<Favorites> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text('Things',style: robo_600_14_29),
-                  usersetting(profileeee: 'Cars', status:
-                  carscontroller.text.isEmpty?
-                  'Add':carscontroller.text, imggg: 'assets/Icons/icon i red.png', onTap: () {
+                  usersetting(
+                    profileeee: 'Cars',
+                    imggg: 'assets/Icons/icon i red.png', onTap: () {
                     showDialog<String>(
                         context: context,
                         builder: (BuildContext context) => NameDialog(
@@ -71,9 +136,15 @@ class _FavoritesState extends State<Favorites> {
                           ),
                         ));
 
-                  },),
-                  usersetting(profileeee: 'Bikes', status:  bikescontroller.text.isEmpty?
-                  'Add':bikescontroller.text, imggg: 'assets/Icons/icon i red.png', onTap: () {
+                  }, text: carscontroller.text.isEmpty?
+                  Text(favmodel.data!.cars.toString() =="" ?
+                  "+ Add" : favmodel.data!.cars.toString()
+                  )  :
+                  Text(carscontroller.text )),
+                  usersetting(profileeee: 'Bikes',
+                  // bikescontroller.text.isEmpty?
+                  // 'Add':bikescontroller.text,
+                    imggg: 'assets/Icons/icon i red.png', onTap: () {
                     showDialog<String>(
                         context: context,
                         builder: (BuildContext context) => NameDialog(
@@ -91,9 +162,9 @@ class _FavoritesState extends State<Favorites> {
                                 EdgeInsets.symmetric(horizontal: 15)),
                           ),
                         ));
-                  },),
-                  usersetting(profileeee: 'Movies', status:  moviescontroller.text.isEmpty?
-                  'Add':moviescontroller.text, imggg: 'assets/Icons/icon1.png', onTap: () {
+                  },text: bikescontroller.text.isEmpty?Text(favmodel.data!.bikes.toString()==""?"+ add":favmodel.data!.bikes.toString()): Text(bikescontroller.text)),
+                   usersetting(profileeee: 'Movies',
+                    imggg: 'assets/Icons/icon1.png', onTap: () {
                     showDialog<String>(
                         context: context,
                         builder: (BuildContext context) => NameDialog(
@@ -111,9 +182,12 @@ class _FavoritesState extends State<Favorites> {
                                 EdgeInsets.symmetric(horizontal: 15)),
                           ),
                         ));
-                  },),
-                  usersetting(profileeee: 'Shows', status:  showscontroller.text.isEmpty?
-                  'Add':showscontroller.text, imggg: 'assets/Icons/icon1.png', onTap: () {
+                  }, text: moviescontroller.text.isEmpty?Text(favmodel.data!.movies.toString()==""?"+ add": favmodel.data!.movies.toString()):
+                  Text(moviescontroller.text),
+                  ),
+                  usersetting(profileeee: 'Shows',
+                    /*showscontroller.text.isEmpty?
+                  'Add':showscontroller.text*/ imggg: 'assets/Icons/icon1.png', onTap: () {
                     showDialog<String>(
                         context: context,
                         builder: (BuildContext context) => NameDialog(
@@ -131,9 +205,11 @@ class _FavoritesState extends State<Favorites> {
                                 EdgeInsets.symmetric(horizontal: 15)),
                           ),
                         ));
-                  },),
-                  usersetting(profileeee: ' Food', status:  foodcontroller.text.isEmpty?
-                  'Add':foodcontroller.text, imggg: 'assets/Icons/icon1.png', onTap: () {
+                  }, text: showscontroller.text.isEmpty?Text(favmodel.data!.shows.toString()==""?"+add": favmodel.data!.shows.toString()): Text(showscontroller.text)),
+                  usersetting(profileeee: ' Food',
+                  // foodcontroller.text.isEmpty?
+                  // 'Add':foodcontroller.text,
+                    imggg: 'assets/Icons/icon1.png', onTap: () {
                     showDialog<String>(
                         context: context,
                         builder: (BuildContext context) => NameDialog(
@@ -151,9 +227,9 @@ class _FavoritesState extends State<Favorites> {
                                 EdgeInsets.symmetric(horizontal: 15)),
                           ),
                         ));
-                  },),
-                  usersetting(profileeee: 'Gadgets', status:  gadgetscontroller.text.isEmpty?
-                  'Add':gadgetscontroller.text, imggg: 'assets/Icons/icon i red.png', onTap: () {
+                  }, text: foodcontroller.text.isEmpty?Text(favmodel.data!.foods.toString()==""?"+add":favmodel.data!.foods.toString()):Text(foodcontroller.text)),
+                  usersetting(profileeee: 'Gadgets',
+                    imggg: 'assets/Icons/icon i red.png', onTap: () {
                     showDialog<String>(
                         context: context,
                         builder: (BuildContext context) => NameDialog(
@@ -171,7 +247,7 @@ class _FavoritesState extends State<Favorites> {
                                 EdgeInsets.symmetric(horizontal: 15)),
                           ),
                         ));
-                  },),
+                  }, text: gadgetscontroller.text.isEmpty?Text(favmodel.data!.gadgets.toString()==""?"+add":favmodel.data!.gadgets.toString()):Text(gadgetscontroller.text)),
                   SizedBox(height: 24),
                   Text('People',style: robo_600_14_29),
                   SizedBox(height: 4),
@@ -189,13 +265,18 @@ class _FavoritesState extends State<Favorites> {
                               hintText: "Enter Your Superhero Name",
                               hintStyle: robo_400_14_b_29,
                               contentPadding:
+
                               EdgeInsets.symmetric(horizontal: 15)),
                         ),
-                      )); }, status:superheroscontroller.text.isEmpty?'+ add':superheroscontroller.text ,),
+                      )); },
+                    /*superheroscontroller.text.isEmpty?'+ add':superheroscontroller.text*/ 
+                    
+                    text: superheroscontroller.text.isEmpty?Text(favmodel.data!.superheroes.toString()==""?"+add":favmodel.data!.superheroes.toString()):Text(superheroscontroller.text),),
                    add(textttt: 'Actors', onTap: () { showDialog<String>(
                        context: context,
                        builder: (BuildContext context) => NameDialog(
                          name: 'Actor Name',
+                         
                          child: TextFormField(
                            onChanged: (v) {
                              setState(() {});
@@ -208,7 +289,10 @@ class _FavoritesState extends State<Favorites> {
                                contentPadding:
                                EdgeInsets.symmetric(horizontal: 15)),
                          ),
-                       )); }, status: actorscontroller.text.isEmpty?'+ add':actorscontroller.text,),
+                       )); }, 
+                     /*actorscontroller.text.isEmpty?'+ add':actorscontroller.text*/ 
+                     
+                     text: actorscontroller.text.isEmpty?Text(favmodel.data!.actors.toString()==""?"+add":favmodel.data!.actors.toString()):Text(actorscontroller.text),),
                   add(textttt: 'Actresses', onTap: () {showDialog<String>(
                       context: context,
                       builder: (BuildContext context) => NameDialog(
@@ -225,7 +309,10 @@ class _FavoritesState extends State<Favorites> {
                               contentPadding:
                               EdgeInsets.symmetric(horizontal: 15)),
                         ),
-                      ));  }, status: actressescontroller.text.isEmpty?'+ add':actressescontroller.text,),
+                      ));  }, 
+                 
+                    /*actressescontroller.text.isEmpty?'+ add':actressescontroller.text*/
+                    text: actressescontroller.text.isEmpty?Text(favmodel.data!.actresses.toString()==""?"+add":favmodel.data!.actresses.toString()):Text(actressescontroller.text),),
                   add(textttt: 'SIngers', onTap: () { showDialog<String>(
                       context: context,
                       builder: (BuildContext context) => NameDialog(
@@ -242,10 +329,8 @@ class _FavoritesState extends State<Favorites> {
                               contentPadding:
                               EdgeInsets.symmetric(horizontal: 15)),
                         ),
-                      )); }, status: singerscontroller.text.isEmpty?'+ add':singerscontroller
-
-
-                      .text,),
+                      )); }, text: singerscontroller.text.isEmpty?Text(favmodel.data!.singers.toString()==""?"+add":favmodel.data!.singers.toString()):Text(singerscontroller.text), 
+                    ),
 
                   add(textttt: 'Players', onTap: () { showDialog<String>(
                       context: context,
@@ -263,7 +348,7 @@ class _FavoritesState extends State<Favorites> {
                               contentPadding:
                               EdgeInsets.symmetric(horizontal: 15)),
                         ),
-                      )); }, status: playerscontroller.text.isEmpty?'+ add':playerscontroller.text,),
+                      )); }, text: playerscontroller.text.isEmpty?Text(favmodel.data!.players.toString()==""?"+add":favmodel.data!.players.toString()):Text(playerscontroller.text), ),
                   SizedBox(height: 24),
                   Text('Places',style: robo_600_14_29),
                   add(textttt: 'Cities', onTap: () {  showDialog<String>(
@@ -282,7 +367,7 @@ class _FavoritesState extends State<Favorites> {
                               contentPadding:
                               EdgeInsets.symmetric(horizontal: 15)),
                         ),
-                      ));}, status:  citiescontroller.text.isEmpty?'+ add':citiescontroller.text,),
+                      ));}, text: citiescontroller.text.isEmpty?Text(favmodel.data!.cities.toString()==""?"+add":favmodel.data!.cities.toString()):Text(citiescontroller.text),),
                   add(textttt: 'Countries', onTap: () { showDialog<String>(
                       context: context,
                       builder: (BuildContext context) => NameDialog(
@@ -299,7 +384,8 @@ class _FavoritesState extends State<Favorites> {
                               contentPadding:
                               EdgeInsets.symmetric(horizontal: 15)),
                         ),
-                      )); }, status: countriesescontroller.text.isEmpty?'+ add':countriesescontroller.text,),
+                      )); },  text: countriesescontroller.text.isEmpty?Text(favmodel.data!.countries.toString()==""?"+add":favmodel.data!.countries.toString()):Text(countriesescontroller.text),
+                 ),
                   add(textttt: 'Restaurants', onTap: () {showDialog<String>(
                       context: context,
                       builder: (BuildContext context) => NameDialog(
@@ -316,7 +402,7 @@ class _FavoritesState extends State<Favorites> {
                               contentPadding:
                               EdgeInsets.symmetric(horizontal: 15)),
                         ),
-                      ));  }, status: resturantscontroller.text.isEmpty?'+ add':resturantscontroller.text,),
+                      ));  }, text: resturantscontroller.text.isEmpty?Text(favmodel.data!.restaurants.toString()==""?"+add":favmodel.data!.restaurants.toString()):Text(resturantscontroller.text) ),
                   add(textttt: 'Hotels', onTap: () { showDialog<String>(
                       context: context,
                       builder: (BuildContext context) => NameDialog(
@@ -333,8 +419,30 @@ class _FavoritesState extends State<Favorites> {
                               contentPadding:
                               EdgeInsets.symmetric(horizontal: 15)),
                         ),
-                      )); }, status: hostelscontroller.text.isEmpty?'+ add':hostelscontroller.text,),
-                ]))]),
+                      )); }, text: hostelscontroller.text.isEmpty?Text(favmodel.data!.hotels.toString()==""?"+add":favmodel.data!.hotels.toString()):Text(hostelscontroller.text),
+                   ),
+                ])),
+            SizedBox(height: 24),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: MainButton(height:52 ,width:double.infinity ,title:'Update' ,txtstyle:robo_500_14_7A , color:
+           kF7E641 , onTap:() {
+                  updatefav(
+                    cars: carscontroller.text, bikes: bikescontroller.text, movies: moviescontroller.text, shows: showscontroller.text, foods: foodcontroller.text, gadgets: gadgetscontroller.text,
+                      superheroes: superheroscontroller.text, actors: actorscontroller.text, actresses: actressescontroller.text, singers: singerscontroller.text, players: playerscontroller.text,
+                      cities: citiescontroller.text,
+                      countries: countriesescontroller.text, restaurants: resturantscontroller.text, hotels: hostelscontroller.text, id: favmodel.data!.userId.toString(), privacy: 'public',).
+                  then((value) async{
+                        if(value['status']==true){
+                          Navigator.pop(context);
+                          Fluttertoast.showToast(msg: value['message']);
+                        } else{
+                          Fluttertoast.showToast(msg: 'please fill all details');
+                        }
+                });
+              } ),
+            ),
+          ]),
       )
     );
   }
@@ -342,10 +450,10 @@ class _FavoritesState extends State<Favorites> {
 //---------------stless
 class usersetting extends StatelessWidget {
   final String profileeee;
-  final String status;
+  final Widget text;
   final String imggg;
   final Function() onTap;
-  const usersetting({super.key, required this.profileeee, required this.status, required this.imggg, required this.onTap});
+  const usersetting({super.key, required this.profileeee, required this.text, required this.imggg, required this.onTap});
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -357,7 +465,8 @@ class usersetting extends StatelessWidget {
           children: [
             Text(profileeee,style: out_400_14_29),
             Row(children: [
-              Text(status,style: robo_400_14_b_29),
+              text,
+
               SizedBox(width: 4),
               Image.asset(imggg),
               SizedBox(width: 4),
@@ -373,8 +482,8 @@ class usersetting extends StatelessWidget {
 class add extends StatelessWidget {
   final String textttt;
   final Function() onTap;
-  final String status;
-  const add({super.key, required this.textttt, required this.onTap, required this.status});
+  final Widget text;
+  const add({super.key, required this.textttt, required this.onTap, required this.text});
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -387,9 +496,9 @@ class add extends StatelessWidget {
             Text(textttt,style: robo_400_14_70),
             Row(
               children: [
-                Text(status,style: robo_500_14_D55),
+          text,
                 SizedBox(width: 4),
-                Image.asset('assets/images/right aroow.png')
+                Image.asset('assets/images/right aroow.png'),
               ],
             ),
           ],

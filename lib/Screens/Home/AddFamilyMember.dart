@@ -43,7 +43,7 @@ Text('Does the person have a SwishList account ?',style: ubun_700_24_29,textAlig
                 },
                 child: Container(
                   height: 52,
-                  width: 328,
+
                  decoration: BoxDecoration(
                    color: KF7E641,
                    borderRadius:BorderRadius.circular(8),
@@ -55,7 +55,7 @@ Text('Does the person have a SwishList account ?',style: ubun_700_24_29,textAlig
               SizedBox(height: 12),
               Container(
                 height: 52,
-                width: 328,
+
                 decoration: BoxDecoration(
 
                   borderRadius:BorderRadius.circular(8),

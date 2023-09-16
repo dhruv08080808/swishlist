@@ -12,12 +12,11 @@ class _ProfileState extends State<Profile> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Profile',style: robo_500_16_29),
-        leading: Icon(Icons.arrow_back_sharp),
+
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: ListView(
-          
           children: [
             Text('Personal',style: robo_600_14_00),
             SizedBox(height: 16),

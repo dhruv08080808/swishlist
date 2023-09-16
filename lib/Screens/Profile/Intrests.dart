@@ -96,8 +96,10 @@ Text('Select your intererests',style: ubun_700_24_29),
                   ))).toList(),
             ),
             Spacer(),
-            MainButton(height: 52,width: 328,title: 'Add',txtstyle: robo_500_14_7A,color: kFCF5B6 , onTap: () {
-            })
+            Center(
+              child: MainButton(height: 52,width: double.infinity,title: 'Add',txtstyle: robo_500_14_7A,color: kFCF5B6 , onTap: () {
+              }),
+            )
            ],
         ),
       ),

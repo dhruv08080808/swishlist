@@ -109,7 +109,7 @@ class _IntroFinalState extends State<IntroFinal> with TickerProviderStateMixin {
               color: Colors.transparent,
               padding: const EdgeInsets.only(left: 20),
               child: Image.asset(
-                "assets/icons/arrowback.svg",
+                "assets/Icons/Backicon.png",
               ),
             ),
           ),

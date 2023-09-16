@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:swishlist_ui/Constants/textstyle.dart';
+import 'package:swishlist_ui/Screens/Profile/Sized%20And%20Weights.dart';
 
 import '../../Constants/colors.dart';
 import '../../widgets/Appbar.dart';
+import '../Profile/Dates And Events.dart';
+import '../Profile/Favorites.dart';
+import 'Family.dart';
+import 'Pets.dart';
+import 'Profile.dart';
 class FriendProfile extends StatefulWidget {
   const FriendProfile({super.key});
 
@@ -28,7 +34,7 @@ class _FriendProfileState extends State<FriendProfile> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: Icon(Icons.arrow_back_sharp),
+
         title: Text(
 
             'AndyAngie3260',style: robo_500_16_29),
@@ -36,50 +42,96 @@ class _FriendProfileState extends State<FriendProfile> {
           Image.asset('assets/Icons/3 dot in a line.png'),
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 20),
-        child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Image.asset('assets/images/friend 1 circle.png',height: 70,width: 70),
-                  SizedBox(width: 8),
-                  Text('Andy Bernard',style: Ubun_700_20,textAlign: TextAlign.center),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 20),
+          child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Image.asset('assets/images/friend 1 circle.png',height: 70,width: 70),
+                    SizedBox(width: 8),
+                    Text('Andy Bernard',style: Ubun_700_20,textAlign: TextAlign.center),
 
-                ],
-              ),
-              SizedBox(height: 24),
-              Text('My Interests',style: robo_600_14_29),
-              SizedBox(height: 12),
-              Wrap(
-                spacing: 8,
-                runSpacing: 8,
-                direction: Axis.horizontal,
-                children: imgg.map((i) => Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: kCBE0FA,
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 7.5),
-                      child: Text('$i'),
-                    ))).toList(),
-              ),
-              SizedBox(height: 32),
-              smallContainer(Txt: 'Profile', imgg: 'assets/Icons/friend profile.png'),
-              SizedBox(height: 8),
-              smallContainer(Txt: 'Sizes and weights', imgg: 'assets/Icons/Size.png'),
-              SizedBox(height: 8),
-              smallContainer(Txt: 'Favourites', imgg: 'assets/Icons/fav.png'),
-              SizedBox(height: 8),
-              smallContainer(Txt: 'Pets', imgg: 'assets/Icons/pets.png'),
-              SizedBox(height: 8),
-              smallContainer(Txt: 'Dates and Events', imgg: 'assets/Icons/dates.png'),
-              SizedBox(height: 8),
-              smallContainer(Txt: 'Family', imgg: 'assets/Icons/Family.png'),
-            ]),
+                  ],
+                ),
+                SizedBox(height: 24),
+                Text('My Interests',style: robo_600_14_29),
+                SizedBox(height: 12),
+                Wrap(
+                  spacing: 8,
+                  runSpacing: 8,
+                  direction: Axis.horizontal,
+                  children: imgg.map((i) => Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: kCBE0FA,
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 7.5),
+                        child: Text('$i'),
+                      ))).toList(),
+                ),
+                SizedBox(height: 32),
+                GestureDetector(
+onTap: (){
+  Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => Profile ()),
+  );
+},
+
+                    child: smallContainer(Txt: 'Profile', imgg: 'assets/Icons/friend profile.png')),
+                SizedBox(height: 8),
+                GestureDetector(
+                   onTap: (){
+                     Navigator.push(
+                       context,
+                       MaterialPageRoute(builder: (context) => sizesandw ()),
+                     );
+                   },
+                    child: smallContainer(Txt: 'Sizes and weights', imgg: 'assets/Icons/Size.png')),
+                SizedBox(height: 8),
+                GestureDetector(
+                    onTap: (){
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Favorites ()),
+                      );
+                    },
+
+                    child: smallContainer(Txt: 'Favourites', imgg: 'assets/Icons/fav.png')),
+                SizedBox(height: 8),
+                GestureDetector(
+                    onTap: (){
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => MyPets()),
+                      );
+                    },
+                    child: smallContainer(Txt: 'Pets', imgg: 'assets/Icons/pets.png')),
+                SizedBox(height: 8),
+                GestureDetector(
+                    onTap: (){
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Datesande()),
+                      );
+                    },
+                    child: smallContainer(Txt: 'Dates and Events', imgg: 'assets/Icons/dates.png')),
+                SizedBox(height: 8),
+                GestureDetector(
+                    onTap: (){
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Family()),
+                      );
+                    },
+                    child: smallContainer(Txt: 'Family', imgg: 'assets/Icons/Family.png')),
+              ]),
+        ),
       ),
     );
   }

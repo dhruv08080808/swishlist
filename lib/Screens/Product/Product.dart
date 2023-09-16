@@ -291,19 +291,25 @@ class _producttState extends State<productt> {
                                               borderRadius: BorderRadius.circular(8),
                                               border: Border.all(color: kA3A3A3),
                                             ),
-                                            child: Center(child: Text('Cancel',style:robo_400_12_28)),
+                                            child: Center(child: Text('Delete',style:robo_400_12_28)),
                                           ),
                                         ),
                                         SizedBox(width: 12),
                                         Expanded(
-                                          child: Container(
-                                            height: 52,
-                                            width: 138,
-                                            decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.circular(8),
-                                              border: Border.all(color: kA3A3A3),
+                                          child: GestureDetector(
+                                            onTap: (){
+
+                                              Navigator.pop(context);
+                                            },
+                                            child: Container(
+                                              height: 52,
+                                              width: 138,
+                                              decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.circular(8),
+                                                border: Border.all(color: kA3A3A3),
+                                              ),
+                                              child: Center(child: Text('Cancel',style:robo_400_12_28)),
                                             ),
-                                            child: Center(child: Text('Cancel',style:robo_400_12_28)),
                                           ),
                                         )
                                       ],)
@@ -373,7 +379,8 @@ class _producttState extends State<productt> {
               ),
             ],),
           SizedBox(height: 20),
-          Image.asset('assets/images/Chair big.png'),
+          Center(child: Image.asset('assets/images/Chair big.png')),
+          SizedBox(height: 4),
           Row(
             children: [
               Text('12 June, 2022',style: robo_400_12_70),

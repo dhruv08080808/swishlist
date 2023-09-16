@@ -65,7 +65,7 @@ class _LinkFamilyMemberState extends State<LinkFamilyMember> {
                     }})
           ),
 Spacer(),
-          MainButton(height: 52,width: 328,title: 'Send request',txtstyle:
+          MainButton(height: 52,width: double.infinity,title: 'Send request',txtstyle:
           emailcontroller.text.isEmpty || selectedCategory.isEmpty?
           robo_500_14_7A:robo_500_14_29,color:
           emailcontroller.text.isEmpty || selectedCategory.isEmpty?

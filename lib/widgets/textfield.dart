@@ -21,7 +21,7 @@ class TextFieldd extends StatelessWidget {
       required this.onTap,
       required this.color,
       required this.hinttext,
-        this.vali});
+      this.vali});
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,9 @@ class TextFieldd extends StatelessWidget {
             BoxDecoration(color: color, borderRadius: BorderRadius.circular(8)),
         child: TextFormField(
           controller: contoller,
+
           decoration: InputDecoration(
+
               border: InputBorder.none,
               hintText: hinttext,
               hintStyle: robo_400_14_70,

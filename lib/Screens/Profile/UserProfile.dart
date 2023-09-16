@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:swishlist_ui/Constants/textstyle.dart';
 
+import '../../API/intrests/Instrests.dart';
 import '../../Constants/colors.dart';
+import '../../Models/intrests_model.dart';
 import 'Dates And Events.dart';
 import 'Favorites.dart';
 import 'Intrests.dart';
@@ -17,6 +19,14 @@ class UserProfile extends StatefulWidget {
 }
 
 class _UserProfileState extends State<UserProfile> {
+  @override
+  void initState() {
+    getAllEvent();
+    super.initState();
+  }
+List <String> ?intrestlist=[''];
+
+
   List imgg = [
     'Cycling',
     'Reading',
@@ -29,6 +39,29 @@ class _UserProfileState extends State<UserProfile> {
     'Watches',
     'Movies and Shows'
   ];
+  bool isLoading = false;
+  GetIntrestModel?intrest;
+  getAllEvent() {
+    isLoading = true;
+    var resp = intrestapi();
+    resp.then((value) {
+      if(value['status'] == true) {
+        setState(() {
+          intrest = GetIntrestModel.fromJson(value);
+          intrestlist=intrest?.data!.interest!.split(",");
+          print(intrestlist);
+          // for (var v in event!.data! ) {
+          //   if (v.type == "all") {
+          //     event2.add(v);
+          //   }
+          // }
+          isLoading = false;
+        });
+      } else{
+        isLoading = false;
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -87,16 +120,16 @@ onTap: (){
             spacing: 8,
             runSpacing: 8,
             direction: Axis.horizontal,
-            children: imgg
-                .map((i) => Container(
+            children: intrestlist!.map((e) =>
+                  Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
                       color: kCBE0FA,
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(
+                      padding:  EdgeInsets.symmetric(
                           horizontal: 10, vertical: 7.5),
-                      child: Text('$i'),
+                      child: Text(e),
                     )))
                 .toList(),
           ),

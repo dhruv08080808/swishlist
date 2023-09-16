@@ -309,7 +309,15 @@ final TextStyle ubun_700_28_29 = GoogleFonts.ubuntu(
       fontSize: 28,
       fontWeight: FontWeight.w700,
       color:k1A1A1A
-      ,
+
+    ));
+
+final TextStyle ubun_500_18_29 = GoogleFonts.ubuntu(
+    textStyle:  TextStyle(
+        fontSize: 18,
+        fontWeight: FontWeight.w500,
+        color:k292929
+
     ));
 final TextStyle ubun_700_16_A8 = GoogleFonts.ubuntu(
     textStyle:  TextStyle(

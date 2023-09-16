@@ -1,7 +1,23 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:swishlist_ui/API/sizesandweights/get_sizesandweights_api.dart';
+import 'package:swishlist_ui/API/sizesandweights/update_sizeandw_api.dart';
 import 'package:swishlist_ui/Constants/textstyle.dart';
+import 'package:swishlist_ui/Screens/Friend/Profile.dart';
+import 'package:swishlist_ui/Screens/Friend/SizesAndWeights.dart';
+import 'package:swishlist_ui/Screens/Profile/Intrests.dart';
+import 'package:swishlist_ui/widgets/Bed.dart';
+import 'package:swishlist_ui/widgets/Shirt.dart';
 
+import '../../API/Favorites/get_Favorities_api.dart';
 import '../../Constants/colors.dart';
+import '../../Models/login_model.dart';
+import '../../Models/sizesandweights_model.dart';
+import '../../widgets/Shoes.dart';
+import '../../widgets/SizesAndWeights.dart';
+import '../../widgets/buttons.dart';
+import '../Product/ProductPrivacy.dart';
 class sizesandw extends StatefulWidget {
 
   const sizesandw({super.key});
@@ -9,10 +25,62 @@ class sizesandw extends StatefulWidget {
   State<sizesandw> createState() => _sizesandwState();
 }
 class _sizesandwState extends State<sizesandw> {
-  int Status=0;
-  int bedi=0;
+
+
+  SizesandWeightsModel sizeandwmodel= SizesandWeightsModel(
+    data: Data(
+      waist: '',
+      shirt: '',
+      shoes: '',
+      bed: '',
+    )
+  );
+
+
+TextEditingController WaistController=TextEditingController();
+  TextEditingController ShirtController=TextEditingController();
+  TextEditingController ShoesController =TextEditingController();
+
+  LoginResponse?respp;
+  var BedController =TextEditingController();
+  List tags = [
+    '20',
+    '22',
+    '24',
+    '26',
+    '28',
+    '30',
+    '32',
+    '34',
+    '36',
+    '38',
+    '40',
+    '44'
+  ];
+  getsizes(){
+    getsizesandweightsapi().then((value){
+      if(value['status']==true){
+        setState(() {
+          sizeandwmodel= SizesandWeightsModel.fromJson(value);
+        });
+      }
+      else{
+        setState(() {
+
+        });
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    getsizes();
+    //updatesizes(waist: '', shirt: '', shoes: '', bed: '', id: '');
+    super.initState();
+  }
   TextEditingController namec=TextEditingController();
   String ?selectedIcon;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,336 +108,65 @@ class _sizesandwState extends State<sizesandw> {
               children: [
                 Text('Fashion',style: robo_600_14_29),
                 SizedBox(height: 4),
-                usersetting(profileeee: 'Waist', status: '32', imggg: 'assets/Icons/icon1.png', onTap: () {
+                usersetting(profileeee: 'Waist', txt:WaistController.text.isEmpty?Text(sizeandwmodel.data!.waist.toString()==""?"+add":sizeandwmodel.data!.waist.toString()):Text(WaistController.text) ,imggg: 'assets/Icons/icon1.png', onTap: () {
                   showDialog<String>(
                       context: context,
-
-                      builder: (BuildContext context) => AlertDialog(
-                        backgroundColor: Colors.white,
-
-                    title:  Text('Waist Size',style: robo_500_14_29,),
-                    insetPadding: EdgeInsets.all(10),
-                    content: SingleChildScrollView(
-                      child: Column(children: [
-                        Row(
-                          children: [
-                            GestureDetector(
-                                onTap:(){
-                                  setState(() {
-                                    Status=0;
-                                  });
-                                },
-                                child: smallc(txtttt: '20', color:
-                                Status==0?kF7E641: kEFEFEF,)),
-                            SizedBox(width: 8),
-                            GestureDetector(
-                                onTap:(){
-                                  setState(() {
-                                    Status=1;
-                                  });
-                                },
-                                child: smallc(txtttt: '22', color:
-                                  Status==1?kF7E641: kEFEFEF,)),
-                            SizedBox(width: 8),
-                            GestureDetector(
-                                onTap:(){
-                                  setState(() {
-                                    Status=2;
-                                  });
-                                },
-
-                                child: smallc(txtttt: '24', color: Status==2?kF7E641: kEFEFEF,)),
-                            SizedBox(width: 8),
-                            GestureDetector(
-                                onTap: (){
-                                  setState(() {
-                                    Status=3;
-                                  });
-                                },
-                                child: smallc(txtttt: '26', color: Status==3?kF7E641: kEFEFEF,)),
-                            SizedBox(width: 8),
-                            smallc(txtttt: '28', color: kEFEFEF,),
-                          ],
-                        ),
-                        SizedBox(height: 8),
-                        Row(
-                          children: [
-                            smallc(txtttt: '30', color: kEFEFEF,),
-                            SizedBox(width: 8),
-                            smallc(txtttt: '32', color: kEFEFEF,),
-                            SizedBox(width: 8),
-                            smallc(txtttt: '36', color: kEFEFEF,),
-                            SizedBox(width: 8),
-                            smallc(txtttt: '38', color: kEFEFEF,),
-                            SizedBox(width: 8),
-                            smallc(txtttt: '40', color: kEFEFEF,),
-                          ],
-                        ),
-                        SizedBox(height: 8),
-                        Row(
-                          children: [
-                            smallc(txtttt: '42', color: kEFEFEF,),
-                            SizedBox(width: 8),
-                            smallc(txtttt: '>44', color: kEFEFEF,),
-                          ],
-                        ),
-                        SizedBox(height: 16),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Text('Visible to',style: robo_400_14_70),
-                            SizedBox(width: 4),
-                            Image.asset('assets/Icons/world icon.png'),
-                            SizedBox(width: 4),
-                            Text('Everyone'),
-                            SizedBox(width: 4),
-Center(child: Image.asset('assets/images/direction-down 01.png'))
-                          ],)
-                      ],),
-                    ),
-                  ),
-                  );
+                      builder: (BuildContext context) => WaistDialog(onPop: (v ) {  setState(() {
+                        WaistController.text=v;
+                      });},));
                 },),
-                usersetting(profileeee: 'Shirt', status: '36', imggg: 'assets/Icons/icon lock.png', onTap: () {  showDialog<String>(
+                usersetting(profileeee: 'Shirt', txt: ShirtController.text.isEmpty?Text(sizeandwmodel.data!.shirt.toString()==""?"+add":sizeandwmodel.data!.shirt.toString()):Text(ShirtController.text), imggg: 'assets/Icons/icon lock.png', onTap: () {  showDialog<String>(
                   context: context,
 
-                  builder: (BuildContext context) => AlertDialog(
-                    backgroundColor: Colors.white,
-
-                    title:  Text('Waist Size',style: robo_500_14_29,),
-                    insetPadding: EdgeInsets.all(10),
-                    content: SingleChildScrollView(
-                      child: Column(children: [
-                        Row(
-                          children: [
-                            GestureDetector(
-                                onTap:(){
-                                  setState(() {
-                                    Status=0;
-                                  });
-                                },
-                                child: smallc(txtttt: '20', color:
-                                Status==0?kF7E641: kEFEFEF,)),
-                            SizedBox(width: 8),
-                            GestureDetector(
-                                onTap:(){
-                                  setState(() {
-                                    Status=1;
-                                  });
-                                },
-                                child: smallc(txtttt: '22', color:
-                                Status==1?kF7E641: kEFEFEF,)),
-                            SizedBox(width: 8),
-                            GestureDetector(
-                                onTap:(){
-                                  setState(() {
-                                    Status=2;
-                                  });
-                                },
-
-                                child: smallc(txtttt: '24', color: Status==2?kF7E641: kEFEFEF,)),
-                            SizedBox(width: 8),
-                            GestureDetector(
-                                onTap: (){
-                                  setState(() {
-                                    Status=3;
-                                  });
-                                },
-                                child: smallc(txtttt: '26', color: Status==3?kF7E641: kEFEFEF,)),
-                            SizedBox(width: 8),
-                            smallc(txtttt: '28', color: kEFEFEF,),
-                          ],
-                        ),
-                        SizedBox(height: 8),
-                        Row(
-                          children: [
-                            smallc(txtttt: '30', color: kEFEFEF,),
-                            SizedBox(width: 8),
-                            smallc(txtttt: '32', color: kEFEFEF,),
-                            SizedBox(width: 8),
-                            smallc(txtttt: '36', color: kEFEFEF,),
-                            SizedBox(width: 8),
-                            smallc(txtttt: '38', color: kEFEFEF,),
-                            SizedBox(width: 8),
-                            smallc(txtttt: '40', color: kEFEFEF,),
-                          ],
-                        ),
-                        SizedBox(height: 8),
-                        Row(
-                          children: [
-                            smallc(txtttt: '42', color: kEFEFEF,),
-                            SizedBox(width: 8),
-                            smallc(txtttt: '>44', color: kEFEFEF,),
-                          ],
-                        ),
-                        SizedBox(height: 16),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Text('Visible to',style: robo_400_14_70),
-                            SizedBox(width: 4),
-                            Image.asset('assets/Icons/world icon.png'),
-                            SizedBox(width: 4),
-                            Text('Everyone'),
-                            SizedBox(width: 4),
-                            Center(child: Image.asset('assets/images/direction-down 01.png'))
-                          ],)
-                      ],),
-                    ),
-                  ),
+                  builder: (BuildContext context) => Shirt(onPop:(valueee){
+                    setState(() {
+                      ShirtController.text=valueee;
+                    });
+                  } )
                 );  },),
 
-                usersetting(profileeee: 'Shoes', status: '', imggg: 'assets/Icons/icon i 1x.png', onTap: () {  showDialog<String>(
+                usersetting(profileeee: 'Shoes', txt:ShoesController.text.isEmpty?Text(sizeandwmodel.data!.shoes.toString()==""?"+add":sizeandwmodel.data!.shoes.toString()):Text(ShoesController.text), imggg: 'assets/Icons/icon i 1x.png', onTap: () {  showDialog<String>(
                   context: context,
+                  builder: (BuildContext context) =>Shoes(onPop: (vv ) {
+                    setState(() {
+                      ShoesController.text=vv;
+                    });
 
-                  builder: (BuildContext context) => AlertDialog(
-                    backgroundColor: Colors.white,
-
-                    title:  Text('Waist Size',style: robo_500_14_29,),
-                    insetPadding: EdgeInsets.all(10),
-                    content: SingleChildScrollView(
-                      child: Column(children: [
-                        Row(
-                          children: [
-                            GestureDetector(
-                                onTap:(){
-                                  setState(() {
-                                    Status=0;
-                                  });
-                                },
-                                child: smallc(txtttt: '6', color:
-                                Status==0?kF7E641: kEFEFEF,)),
-                            SizedBox(width: 8),
-                            GestureDetector(
-                                onTap:(){
-                                  setState(() {
-                                    Status=1;
-                                  });
-                                },
-                                child: smallc(txtttt: '7', color:
-                                Status==1?kF7E641: kEFEFEF,)),
-                            SizedBox(width: 8),
-                            GestureDetector(
-                                onTap:(){
-                                  setState(() {
-                                    Status=2;
-                                  });
-                                },
-
-                                child: smallc(txtttt: '8', color: Status==2?kF7E641: kEFEFEF,)),
-                            SizedBox(width: 8),
-                            GestureDetector(
-                                onTap: (){
-                                  setState(() {
-                                    Status=3;
-                                  });
-                                },
-                                child: smallc(txtttt: '9', color: Status==3?kF7E641: kEFEFEF,)),
-                            SizedBox(width: 8),
-                            smallc(txtttt: '10', color: kEFEFEF,),
-                          ],
-                        ),
-                        SizedBox(height: 8),
-                        Row(
-                          children: [
-                            smallc(txtttt: '11', color: kEFEFEF,),
-
-                          ],
-                        ),
-
-                        SizedBox(height: 16),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Text('Visible to',style: robo_400_14_70),
-                            SizedBox(width: 4),
-                            Image.asset('assets/Icons/world icon.png'),
-                            SizedBox(width: 4),
-                            Text('Everyone'),
-                            SizedBox(width: 4),
-                            Center(child: Image.asset('assets/images/direction-down 01.png'))
-                          ],)
-                      ],),
-                    ),
-                  ),
+                  },)
                 ); },),
                 SizedBox(height: 24),
                 Text('Home',style: robo_600_14_29),
                 SizedBox(height: 4),
-                usersetting(profileeee: 'Bed', status: '$bedi', imggg: 'assets/Icons/icon1.png', onTap: () {  showDialog<String>(
+                usersetting(profileeee: 'Bed', txt: BedController.text.isEmpty?Text(sizeandwmodel.data!.bed.toString()==""?"+add":sizeandwmodel.data!.bed.toString()):Text(BedController.text), imggg: 'assets/Icons/icon1.png', onTap: () {  showDialog<String>(
                   context: context,
 
-                  builder: (BuildContext context) => AlertDialog(
-                    backgroundColor: Colors.white,
-
-                    title:  Text(' Bed',style: robo_500_14_29,),
-                    insetPadding: EdgeInsets.all(10),
-                    content: SingleChildScrollView(
-                      child: Column(children: [
-                        Row(
-                          children: [
-                            GestureDetector(
-                                onTap:(){
-                                  setState(() {
-                                bedi=0;
-                                  });
-                                },
-                                child: smallc(txtttt:
-                                'Single', color:
-                                bedi==0?kF7E641: kEFEFEF,)),
-                            SizedBox(width: 8),
-                            GestureDetector(
-                                onTap:(){
-                                  setState(() {
-                                    bedi=1;
-                                  });
-                                },
-                                child: smallc(txtttt:'Double', color:
-                                bedi==1?kF7E641: kEFEFEF,)),
-                            SizedBox(width: 8),
-                            GestureDetector(
-                                onTap:(){
-                                  setState(() {
-                                    bedi=2;
-                                  });
-                                },
-
-                                child: smallc(txtttt: 'King', color: bedi==2?kF7E641: kEFEFEF,)),
-                            SizedBox(width: 8),
-                            GestureDetector(
-                                onTap: (){
-                                  setState(() {
-                                    bedi=3;
-                                  });
-                                },
-                                child: smallc(txtttt: 'Queen', color: bedi==3?kF7E641: kEFEFEF,)),
-                            SizedBox(width: 8),
-
-                          ],
-                        ),
-                        SizedBox(height: 16),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Text('Visible to',style: robo_400_14_70),
-                            SizedBox(width: 4),
-                            Image.asset('assets/Icons/world icon.png'),
-                            SizedBox(width: 4),
-                            Text('Everyone'),
-                            SizedBox(width: 4),
-                            Center(child: Image.asset('assets/images/direction-down 01.png'))
-                          ],)
-                      ],),
-                    ),
-                  ),
+                  builder: (BuildContext context) => Bed(onPop: (beddd){
+                    setState(() {
+                      BedController.text=beddd;
+                    });
+                  })
                 ); },),
               ],
             ),
           ),
+      SizedBox(height: 24),
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: MainButton(height:52 ,width:double.infinity ,title:'Update' ,txtstyle:robo_500_14_7A , color: kF7E641, onTap: () {
+          updatesizes(waist: WaistController.text,
+            shirt: ShirtController.text,
+            shoes: ShoesController.text,
+            bed: BedController.text,
+            idd:sizeandwmodel.data!.id.toString(), privacy: 'public').then((value) async{
+              if(value['status']==true){
+                Navigator.pop(context);
+                Fluttertoast.showToast(msg: value['message']);
+              } else{
+                Fluttertoast.showToast(msg: 'please fill the details');
+              }
+          }); },),
+      )
+
         ],
       ),
     );
@@ -378,10 +175,10 @@ Center(child: Image.asset('assets/images/direction-down 01.png'))
 //---------------stless
 class usersetting extends StatelessWidget {
   final String profileeee;
-  final String status;
+  final Widget txt;
   final String imggg;
   final Function() onTap;
-  const usersetting({super.key, required this.profileeee, required this.status, required this.imggg, required this.onTap});
+  const usersetting({super.key, required this.profileeee,  required this.imggg, required this.onTap, required this.txt});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -393,7 +190,7 @@ class usersetting extends StatelessWidget {
           children: [
             Text(profileeee,style: robo_400_14_70),
             Row(children: [
-              Text(status,style: robo_400_14_b_29),
+            txt,
               SizedBox(width: 4),
               Image.asset(imggg),
               SizedBox(width: 4),
@@ -406,25 +203,4 @@ class usersetting extends StatelessWidget {
   }
 }
 //-------------------------stless
-class smallc extends StatelessWidget {
-  final String txtttt;
-  final Color color;
 
-  const smallc({super.key, required this.txtttt, required this.color});
-
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 36,
-      width: 52,
-      decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(8),
-         color: kEFEFEF,
-        border: Border.all(color:color)
-
-      ),
-      child: Center(child: Text(txtttt,style: robo_400_14_b_29,)),
-    );
-  }
-}

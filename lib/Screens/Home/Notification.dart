@@ -26,9 +26,8 @@ class _notiState extends State<noti> {
      crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-          SizedBox(height: 16),Container(
-            width: 328,
-            height: 40,
+          SizedBox(height: 16),
+              Container(
             child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -48,13 +47,15 @@ class _notiState extends State<noti> {
           ),
               SizedBox(height: 12),
               Container(
-                width: 328,
+
                 height: 40,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text('Shared with me',style: robo_400_14_00),
+                    Spacer(),
                     CupertinoSwitch(
+
                       activeColor: kF7E641,
                       thumbColor: k9F9F9F,
                       value: _switchValue1,
@@ -68,7 +69,7 @@ class _notiState extends State<noti> {
                 ),
               ),
               SizedBox(height: 12),   Container(
-                width: 328,
+
                 height: 40,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -89,7 +90,7 @@ class _notiState extends State<noti> {
               ),
               SizedBox(height: 12),
               Container(
-                width: 328,
+
                 height: 40,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -103,13 +104,12 @@ class _notiState extends State<noti> {
                         setState(() {
                           _switchValue3 = value;
                         });
-                      },
-                    ),
-                  ],
-                ),
-              ),
-
-        ]),
+                      }
+                    )
+                  ]
+                )
+              )
+        ])
       ),
     );
   }
