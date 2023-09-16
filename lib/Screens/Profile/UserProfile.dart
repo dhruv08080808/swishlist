@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:swishlist_ui/Constants/textstyle.dart';
+import 'package:swishlist_ui/Screens/LoginScreen/Signin.dart';
 
 import '../../API/intrests/Instrests.dart';
 import '../../Constants/colors.dart';
 import '../../Models/intrests_model.dart';
+import '../../constant/sharedprefrences/sharedprefrences.dart';
+import '../../widgets/popup_menu.dart';
 import 'Dates And Events.dart';
 import 'Favorites.dart';
 import 'Intrests.dart';
@@ -70,7 +73,59 @@ List <String> ?intrestlist=[''];
 
         title: Text('MichieMaster34', style: robo_500_16_29),
         actions: [
-          Image.asset('assets/Icons/3 dot in a line.png'),
+          Popupmen(menuList: [
+            PopupMenuItem(
+              child: ListTile(
+                title: InkWell(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Signin()));
+                  },
+                  child: Text(
+                    'Delete Account',
+                    style: robo_500_14_39,
+                  ),
+                ),
+              ),
+            ),
+            // PopupMenuItem(
+            //   child: ListTile(
+            //     title: InkWell(
+            //       onTap: () {
+            //         Navigator.push(context,
+            //             MaterialPageRoute(builder: (context) => Privacy()));
+            //       },
+            //       child: Text(
+            //         'Privacy',
+            //         style: AppTextStyle().textColor39393914w500,
+            //       ),
+            //     ),
+            //   ),
+            // ),
+            PopupMenuItem(
+              child: GestureDetector(
+                onTap: () {
+                  // SharedPrefs().setLoginFalse();
+                  // SharedPrefs().clearPrefs();
+                  // logoutApi().then((value) {
+                  //   if(value['status'] == true) {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => Signin(),
+                    ),
+                  );
+                },
+                child: ListTile(
+                  title: Text(
+                    'Log out',
+                    style: robo_500_14_39,
+                  ),
+                ),
+              ),
+            ),
+          ],   icon: Image.asset('assets/Icons/3 dot in a line.png'),
+          )
         ],
       ),
       body: Padding(

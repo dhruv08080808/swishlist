@@ -163,10 +163,7 @@ bool one=false;
                        ubun_500_18_29),
                      //  Text('Number verified',style: robo_500_14_65),
                        SizedBox(height: 8),
-
-
                     AnimatedContainer(
-
                       height:next? 200:0,
                       duration: Duration(milliseconds: 5),
                    child: Column(
