@@ -13,7 +13,6 @@ Future<dynamic> updatesizes({
   required String privacy,
 })async{
 
-
   var headers = {
     'Authorization': 'Bearer ${SharedPrefs().getLoginToken()}'
   };

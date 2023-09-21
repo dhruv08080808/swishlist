@@ -48,7 +48,7 @@ class _ProfileState extends State<Profile> {
                         Text('-'),])])),
             usersetting(profileeee: 'Email', status: 'Harrywilson134@gmail.com', imggg: 'assets/images/icon copy.png', onTap: () {  },),
             SizedBox(height: 24),
-            Text('Addresses',style: robo_600_14_00),
+            Text('Addressess',style: robo_600_14_00),
             SizedBox(height: 4),
             Text('Home',style: robo_400_14_A9),
             SizedBox(height: 2),

@@ -80,6 +80,12 @@ getproductdetails(){
    }
  });
 }
+  final titleController = TextEditingController();
+  final productLinkController = TextEditingController();
+  final priceController = TextEditingController();
+  final dateController = TextEditingController();
+  final productTypeController = TextEditingController();
+  bool isLoading = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -311,11 +317,16 @@ getproductdetails(){
                               },
                             );
                           },
-                          child: Row(
-                            children: [
-                              Image.asset('assets/Icons/Plus.png',height: 20,width: 20,),
-                              Text('Add',style: robo_500_14_29)
-                            ],
+                          child: GestureDetector(
+                            onTap: (){
+                              getproductapi(type: productTypeController.text, name: titleController.text, link: , price: price, purchase_date: purchase_date, privacy: privacy, photo: photo)
+                            },
+                            child: Row(
+                              children: [
+                                Image.asset('assets/Icons/Plus.png',height: 20,width: 20,),
+                                Text('Add',style: robo_500_14_29)
+                              ],
+                            ),
                           ),
                         ),
                       ),

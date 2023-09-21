@@ -16,6 +16,7 @@ Future<dynamic>updateprofileapi({
   required String workadd,
   required String id,
   required String privacy,
+  required String photo,
 })async{
   var headers = {
     'Authorization': 'Bearer ${SharedPrefs().getLoginToken()}'
@@ -35,7 +36,11 @@ Future<dynamic>updateprofileapi({
     'privacy_status':privacy ,
     'id': id
   });
-  //request.files.add(await http.MultipartFile.fromPath('photo', '/path/to/file'));
+  if(photo!=''){
+    request.files.add(await http.MultipartFile.fromPath('photo', photo)
+    );
+  }
+
   request.headers.addAll(headers);
 
   http.StreamedResponse response = await request.send();

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:swishlist_ui/Constants/textstyle.dart';
+import 'package:swishlist_ui/Models/activities_model.dart';
+
+import '../../API/activities/getactivities.dart';
 
 class homeactivites extends StatefulWidget {
   const homeactivites({super.key});
@@ -10,10 +13,40 @@ class homeactivites extends StatefulWidget {
 
 class _homeactivitesState extends State<homeactivites> {
   @override
+  void initState() {
+    getActivity();
+    super.initState();
+  }
+
+  Activity1?act1;
+  bool isLoading = false;
+  getActivity(){
+    isLoading= true;
+    getactivities().then((value) {
+      if(value.status){
+        setState(() {
+          act1=value;
+          bool isLoading = false;
+        });
+
+      }else{
+        isLoading = false;
+      }
+
+    });
+  }
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Activities',style: ubun_700_24_29)),
-      body: Column(
+
+      appBar: AppBar(title:
+
+
+      Text('Activities',style: ubun_700_24_29)),
+      body:
+
+
+      Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
 SizedBox(height: 96),

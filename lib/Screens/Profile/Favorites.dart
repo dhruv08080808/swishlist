@@ -3,6 +3,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:swishlist_ui/Constants/textstyle.dart';
 import 'package:swishlist_ui/Models/login_model.dart';
 
+import '../../API/Favorites/fav_Store.dart';
 import '../../API/Favorites/get_Favorities_api.dart';
 import '../../API/Favorites/update_fav_api.dart';
 import '../../Constants/colors.dart';
@@ -56,6 +57,7 @@ FavoritiesModel favmodel = FavoritiesModel(
     hotels: '',
     privacyStatus: '',
     createdAt: '',
+    id: null
   )
 );
 
@@ -423,6 +425,41 @@ bool isLoading = false;
                    ),
                 ])),
             SizedBox(height: 24),
+            (favmodel.data!.hotels.toString()=='') ?
+           MainButton(height: 52, width: double.infinity, title: 'Save', txtstyle:robo_500_14_7A , onTap: (){
+             if(carscontroller.text.isNotEmpty &&
+                 bikescontroller.text.isNotEmpty &&
+                 moviescontroller.text.isNotEmpty &&
+                 showscontroller.text.isNotEmpty &&
+                 foodcontroller.text.isNotEmpty &&
+                 gadgetscontroller.text.isNotEmpty &&
+                 superheroscontroller.text.isNotEmpty &&
+                 actorscontroller.text.isNotEmpty &&
+                 singerscontroller.text.isNotEmpty &&
+                 actressescontroller.text.isNotEmpty &&
+                 playerscontroller.text.isNotEmpty &&
+                 citiescontroller.text.isNotEmpty &&
+                 countriesescontroller.text.isNotEmpty &&
+                 resturantscontroller.text.isNotEmpty &&
+                 hostelscontroller.text.isNotEmpty){
+
+             }
+
+            storefavapi(cars: carscontroller.text, bikes: bikescontroller.text, movies: moviescontroller.text, shows: showscontroller.text,
+                foods: foodcontroller.text, gadgets: gadgetscontroller.text, superheroes: superheroscontroller.text, actors: actorscontroller.text, actresses: actressescontroller.text,
+                singers: singerscontroller.text, players: playerscontroller.text, cities: citiescontroller.text, countries: countriesescontroller.text, restaurants: resturantscontroller.text,
+                hotels: hostelscontroller.text, privacy: 'public').then((value) async{
+                  if(value['status']==true){
+                    Navigator.pop(context);
+                    Fluttertoast.showToast(msg: value['message']);
+                  } else{
+                    Fluttertoast.showToast(msg: 'please fill all details');
+                  }
+            });
+
+           }, color: kF7E641):
+
+
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: MainButton(height:52 ,width:double.infinity ,title:'Update' ,txtstyle:robo_500_14_7A , color:
@@ -431,7 +468,7 @@ bool isLoading = false;
                     cars: carscontroller.text, bikes: bikescontroller.text, movies: moviescontroller.text, shows: showscontroller.text, foods: foodcontroller.text, gadgets: gadgetscontroller.text,
                       superheroes: superheroscontroller.text, actors: actorscontroller.text, actresses: actressescontroller.text, singers: singerscontroller.text, players: playerscontroller.text,
                       cities: citiescontroller.text,
-                      countries: countriesescontroller.text, restaurants: resturantscontroller.text, hotels: hostelscontroller.text, id: favmodel.data!.userId.toString(), privacy: 'public',).
+                      countries: countriesescontroller.text, restaurants: resturantscontroller.text, hotels: hostelscontroller.text, id: favmodel.data!.id.toString(), privacy: 'public',).
                   then((value) async{
                         if(value['status']==true){
                           Navigator.pop(context);

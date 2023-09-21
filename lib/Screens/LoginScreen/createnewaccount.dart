@@ -158,7 +158,7 @@ class _createnewaccState extends State<createnewacc> {
               kF7E641 , onTap: () {
                 print('jnkk${SharedPrefs().getLoginToken()}');
 // if(_form.currentState!.validate()){}
-                updateprofileapi(fullname: namec.text, username: usercontroller.text, phone: phonecontroller.text, photoo:
+                updateprofileapi1(fullname: namec.text, username: usercontroller.text, phone: phonecontroller.text, photoo:
                     pickedImage.isAbsolute?pickedImage.path:'', email: widget.email).then((value){
     if(value['status']==true){
         Navigator.push(

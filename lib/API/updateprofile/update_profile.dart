@@ -3,7 +3,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:swishlist_ui/constant/sharedprefrences/sharedprefrences.dart';
-Future<dynamic> updateprofileapi({
+Future<dynamic> updateprofileapi1({
   required String fullname,//yahi se mil jayega
   required String username,//yahi se mil jayega
   required String phone,// yahi se mil jayega

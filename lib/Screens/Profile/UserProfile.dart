@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:swishlist_ui/API/logout/logoutapi.dart';
 import 'package:swishlist_ui/Constants/textstyle.dart';
 import 'package:swishlist_ui/Screens/LoginScreen/Signin.dart';
 
@@ -105,16 +107,24 @@ List <String> ?intrestlist=[''];
             PopupMenuItem(
               child: GestureDetector(
                 onTap: () {
+                  logoutapi().then((value) {
+                    if(value['status']==true){
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => Signin(),
+                        ),
+                      );
+                    }
+                    else{
+                      Fluttertoast.showToast(msg: 'LOGOUT FAILDED');
+                    }
+                  });
                   // SharedPrefs().setLoginFalse();
                   // SharedPrefs().clearPrefs();
                   // logoutApi().then((value) {
                   //   if(value['status'] == true) {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => Signin(),
-                    ),
-                  );
+
                 },
                 child: ListTile(
                   title: Text(

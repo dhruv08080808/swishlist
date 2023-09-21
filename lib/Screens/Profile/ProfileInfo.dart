@@ -371,7 +371,7 @@ String ?Gender;
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: MainButton(height:52 ,width:double.infinity ,title:'Update' ,txtstyle:robo_500_14_7A , color: kF7E641, onTap: () {
         updateprofileapi(name: NameC.text, gender:genderController.text, dob: date.toString(), occupation: OccupationC.text, relation: RelationshipController.text,
-            email: emailcontroller.text, phone: phonecontroller.text, alternatephone: alternatephonecontroller.text, homeadd: Adresscontroller.text, workadd: WorkController.text, id: profilemodelll.data!.id.toString(), privacy: 'public').then((value) async {
+            email: emailcontroller.text, phone: phonecontroller.text, alternatephone: alternatephonecontroller.text, homeadd: Adresscontroller.text, workadd: WorkController.text, id: profilemodelll.data!.user!.id.toString(), privacy: 'public', photo: '').then((value) async {
               if (value['status']==true){
                 Navigator.pop(context);
                 Fluttertoast.showToast(msg: value['message']);
